@@ -4,6 +4,8 @@ import static java.nio.file.Files.delete;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +33,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class sanpham extends AppCompatActivity {
-
+public class sanpham extends AppCompatActivity{
     private FloatingActionButton fltadd;
     private ListView lvMain;
     private EditText edt_seach;
@@ -45,12 +46,19 @@ public class sanpham extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sanpham);
         fltadd = findViewById(R.id.fltadd);
+        edt_seach = findViewById(R.id.edt_seach);
         lvMain = findViewById(R.id.listviewMain);
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.DOMAIN)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
          apiService = retrofit.create(ApiService.class);
+         edt_seach.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 opendialogSeach();
+             }
+         });
         fltadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +105,13 @@ public class sanpham extends AppCompatActivity {
             }
         });
     }
-//    public void delete(int pos){
+
+    private void opendialogSeach() {
+
+
+    }
+
+    //    public void delete(int pos){
 //        String id = lvMain.get(pos).get_id();
 //        Call<Void> call = apiService.deleteCar(id);
 //        call.enqueue(new Callback<Void>() {
@@ -173,6 +187,7 @@ public class sanpham extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 //    private void getCarsFromApi() {
 //        ApiService apiService = retrofit.create(ApiService.class);
 //        Call<List<CarModel>> call = apiService.getCars();
@@ -191,6 +206,7 @@ public class sanpham extends AppCompatActivity {
 //            }
 //        });
 //    }
+    
     }
 
 

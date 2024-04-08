@@ -10,9 +10,12 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
-    String DOMAIN = "http://192.168.6.102:3000/";
+    @GET("search-distributor")
+    Call<List<CarModel>> searchDistributor(@Query("key") String key);
+    String DOMAIN = "http://10.24.13.175:3000/";
     @GET("/api/list")
     Call<List<CarModel>> getCars();
     @POST("/add_xe")
